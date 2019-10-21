@@ -1,0 +1,71 @@
+syntax = "proto2";
+
+package bsw.protoconf;
+
+// some configuration
+message configuration // jea real configuration comment
+{
+    optional string descr_valName = 1 [default = "This is simple value description"];
+    optional string valName = 2 [default = ""];
+
+    optional string descr_valUint= 3 [default = "This is dedicated to test integer value"];
+    optional uint32 valUint = 4 [default = 10];
+
+    optional string descr_statisticsInt = 5 [default = "Statistics with integer values"];
+    repeated int32 statisticsInt = 6;
+
+    optional string descr_statisticsFloat = 7 [default = "Statistics with float values"];
+    repeated float statisticsFloat = 8;
+
+    optional string descr_v1conf = 20 [default = "This describes protocol version 1"];
+    optional v1 v1conf = 21;
+
+    optional string descr_v2conf = 30 [default = "This describes protocol version 2"];
+    optional v2 v2conf = 31;
+
+    optional string descr_Big = 32 [default = "This is big description\n with new lines \n lene \n line"];
+}//configuration
+
+message v1
+{
+   optional string descr_enable = 1 [default = "If protocol version 1 configuration is used"];
+   optional bool enable = 2 [default = false];
+
+   optional string descr_name = 3 [default = "This value is special for protocol version 1 name"];
+   optional string name = 4;
+}
+
+
+message v2
+{
+   optional string descr_enable = 1 [default = "If protocol version 2 configuration is used"];
+   optional bool enable = 2 [default = false];
+
+   optional string descr_name = 3 [default = "This value is special for protocol version 2 name"];
+   optional string name = 4;
+
+   enum Corpus {
+      UNIVERSAL = 0;
+      WEB = 1;
+      IMAGES = 2;
+      LOCAL = 3;
+      NEWS = 4;
+      PRODUCTS = 5;
+      VIDEO = 6;
+   }
+   optional string descr_corpus = 5 [default = "Enum values"];
+   optional Corpus corpus = 6 [default = UNIVERSAL];
+
+   optional string descr_data = 7 [default = "Data sequence"];
+   repeated data datas = 8;
+}
+
+message data
+{
+   optional string descr_id = 1 [default = "Data id"];
+   optional int64 id = 2 [default = 999999999];
+   optional string descr_hash = 3 [default = "Data hash"];
+   optional string hash = 4 [default = "ADKJEFKJEF"];
+   optional string descr_value = 5 [default = "Data value"];
+   optional uint64 value = 6;
+}
