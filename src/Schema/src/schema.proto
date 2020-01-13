@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package bsw.protoconf;
+package bsw.pconf;
 
 // some configuration
 message configuration // jea real configuration comment

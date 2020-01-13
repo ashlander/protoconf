@@ -5,7 +5,6 @@
 #include <Schema/schema.pb.h>
 
     using namespace bsw;
-    //using namespace protoconf; // DO NOT USE using protoconf !!! Really don't
 
     class ProtoconfTests: public ::testing::Test
     {
@@ -21,7 +20,7 @@
 
     TEST_F(ProtoconfTests, CheckVersion)
     {
-        std::string version = protoconf::module::version();
+        std::string version = pconf::module::version();
         printf("%s\n", version.c_str());
         ASSERT_TRUE(!version.empty());
     }
@@ -29,7 +28,7 @@
     TEST_F(ProtoconfTests, SaveLoadConfiguration)
     {
        const std::string path("/tmp/protoconfiguration.json");
-       protoconf::configuration conf;
+       pconf::configuration conf;
 
        std::string json;
        bool result = protoconf::toJson(conf, json);

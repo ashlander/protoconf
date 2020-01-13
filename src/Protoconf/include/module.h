@@ -3,12 +3,12 @@
 #include <string>
 
 namespace bsw {
-namespace protoconf {
+namespace pconf {
 namespace module {
 
    std::string version();
 
 } /* namespace module */
-} /* namespace protoconf */
+} /* namespace pconf */
 } /* namespace bsw */
 

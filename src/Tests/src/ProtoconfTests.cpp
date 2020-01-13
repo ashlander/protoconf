@@ -14,10 +14,10 @@
         public:
             ProtoconfTests()
             {
-               testConfiguration.set_allocated_v1conf( new protoconf::v1() );
+               testConfiguration.set_allocated_v1conf( new pconf::v1() );
 
                // Note: nested messages will not be displayed, unless explicitly added
-               auto v2instance = new protoconf::v2();
+               auto v2instance = new pconf::v2();
                testConfiguration.set_allocated_v2conf( v2instance );
 
                for (int32_t i = 0; i < 5; ++i)
@@ -41,12 +41,12 @@
             {
             }
 
-            protoconf::configuration testConfiguration;
+            pconf::configuration testConfiguration;
     };//class
 
     TEST_F(ProtoconfTests, DefaultConfigurationToJson)
     {
-       protoconf::configuration conf;
+       pconf::configuration conf;
        std::string json;
        bool result = protoconf::toJson(conf, json);
        ASSERT_TRUE(result);
@@ -66,14 +66,14 @@
 
     TEST_F(ProtoconfTests, JsonToConfiguration)
     {
-       protoconf::configuration conf;
+       pconf::configuration conf;
 
        std::string json;
        bool result = protoconf::toJson(conf, json);
        ASSERT_TRUE(result);
        ASSERT_TRUE(!json.empty());
 
-       protoconf::configuration confRecovered;
+       pconf::configuration confRecovered;
        result = protoconf::fromJson(json, confRecovered);
        ASSERT_TRUE(result);
 
@@ -88,15 +88,15 @@
     TEST_F(ProtoconfTests, LoadMissingConfiguration)
     {
        const std::string path("/tmp/something_not_exist.json");
-       protoconf::configuration conf;
-       bool result = protoconf::load(path, conf, protoconf::configuration(), true, false /*do not create missing configuration*/);
+       pconf::configuration conf;
+       bool result = protoconf::load(path, conf, pconf::configuration(), true, false /*do not create missing configuration*/);
        ASSERT_FALSE(result);
     }
 
     TEST_F(ProtoconfTests, SaveTemplateConfiguration)
     {
        const std::string path("/tmp/something_not_exist.json");
-       protoconf::configuration conf;
+       pconf::configuration conf;
 
        std::string json;
        bool result = protoconf::toJson(testConfiguration, json);
@@ -116,7 +116,7 @@
     TEST_F(ProtoconfTests, SaveLoadConfiguration)
     {
        const std::string path("/tmp/protoconfiguration.json");
-       protoconf::configuration conf;
+       pconf::configuration conf;
 
        std::string json;
        bool result = protoconf::toJson(conf, json);
@@ -138,7 +138,7 @@
     TEST_F(ProtoconfTests, BigStringSaveLoadConfiguration)
     {
        const std::string path("/tmp/protoconfiguration.json");
-       protoconf::configuration conf;
+       pconf::configuration conf;
 
        const char* name = R"_(Some big and heavy string with
 multiple new lines
@@ -179,7 +179,7 @@ const char* partialConfig = R"_({
        std::string json = partialConfig;
        printMessage(std::string("SRC JSON configuration: \n") + json);
 
-       protoconf::configuration conf;
+       pconf::configuration conf;
        bool result = protoconf::fromJson(json, conf);
        ASSERT_TRUE(result);
 
@@ -201,7 +201,7 @@ const char* switchPosition = R"_({
        std::string json = switchPosition;
        printMessage(std::string("SRC JSON configuration: \n") + json);
 
-       protoconf::configuration conf;
+       pconf::configuration conf;
        bool result = protoconf::fromJson(json, conf);
        ASSERT_TRUE(result);
 
@@ -225,7 +225,7 @@ const char* removeOptional = R"_({
        std::string json = removeOptional;
        printMessage(std::string("SRC JSON configuration: \n") + json);
 
-       protoconf::configuration conf;
+       pconf::configuration conf;
        bool result = protoconf::fromJson(json, conf);
        ASSERT_TRUE(result);
 
@@ -255,7 +255,7 @@ const char* commentOptional = R"_({
        std::string json = commentOptional;
        printMessage(std::string("SRC JSON configuration: \n") + json);
 
-       protoconf::configuration conf;
+       pconf::configuration conf;
        bool result = protoconf::fromJson(json, conf);
        ASSERT_TRUE(result);
 

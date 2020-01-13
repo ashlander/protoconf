@@ -5,7 +5,7 @@
 
     using namespace boost;
     using namespace bsw;
-    using namespace protoconf;
+    using namespace pconf;
 
     class ModuleTests: public LogTest
     {

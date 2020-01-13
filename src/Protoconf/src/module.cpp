@@ -8,7 +8,7 @@
 #include <Common/macro.h>
 
 namespace bsw {
-namespace protoconf {
+namespace pconf {
 namespace module {
 
 std::string version()
